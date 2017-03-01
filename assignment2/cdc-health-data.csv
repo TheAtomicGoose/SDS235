@@ -1,0 +1,37 @@
+Age,Inactive,Low activity,Medium activity,High activity,Did not meet 2008 federal guidelines for aerobic activity,Met 2008 federal guidelines for aerobic activity
+18–24 years,23.6,16.1,15.0,45.3,39.6,60.4
+25–44 years,25.8,19.5,16.8,37.9,45.1,54.9
+45–64 years,32.8,21.3,15.5,30.4,53.9,46.1
+65–74 years,36.6,21.0,14.3,28.0,57.5,42.5
+75 years and over,51.8,20.5,11.3,16.4,72.2,27.8
+Race,Inactive,Low activity,Medium activity,High activity,Did not meet 2008 federal guidelines for aerobic activity,Met 2008 federal guidelines for aerobic activity
+White,29.3,19.7,15.8,35.3,48.8,51.2
+Black or African American,39.3,18.8,13.1,28.8,58.0,42.0
+American Indian or Alaska Native,34.6,20.0,12.9,32.4,54.5,45.5
+Asian,29.8,22.3,18.3,29.7,52.0,48.0
+Native Hawaiian or Other Pacific Islander,33.6,13.4,11.1,41.9,47.0,53.0
+Hispanic or Latino,40.2,17.9,13.4,28.5,58.0,42.0
+Education,Inactive,Low activity,Medium activity,High activity,Did not meet 2008 federal guidelines for aerobic activity,Met 2008 federal guidelines for aerobic activity
+Less than high school diploma,52.4,17.4,10.5,19.7,69.6,30.4
+GED or equivalent,43.1,19.9,11.2,25.7,62.9,37.1
+High school graduate,40.8,20.2,13.3,25.8,60.8,39.2
+Some college, no degree,30.3,21.7,15.2,32.7,51.9,48.1
+Associate's degree,28.2,21.1,16.2,34.5,49.1,50.9
+Bachelor's degree,18.5,21.0,19.7,40.9,39.3,60.7
+Master's, professional, or doctoral degree,14.2,20.7,20.5,44.6,34.7,65.3
+Poverty status,Inactive,Low activity,Medium activity,High activity,Did not meet 2008 federal guidelines for aerobic activity,Met 2008 federal guidelines for aerobic activity
+Less than 100% of the poverty threshold,45.4,18.1,11.8,24.8,63.3,36.7
+100% to less than 200% of the poverty threshold,41.5,19.3,12.8,26.4,60.6,39.4
+200% to less than 400% of the poverty threshold,31.1,20.7,15.6,32.6,51.7,48.3
+400% of the poverty threshold or greater,19.2,19.8,18.3,42.8,38.8,61.2
+Marital status,Inactive,Low activity,Medium activity,High activity,Did not meet 2008 federal guidelines for aerobic activity,Met 2008 federal guidelines for aerobic activity
+Married,28.7,20.8,16.8,33.7,49.4,50.6
+Widowed,37.3,22.4,12.5,27.9,59.5,40.5
+Divorced or separated,34.8,19.4,14.0,31.8,54.0,46.0
+Never married,32.0,18.5,14.4,35.1,50.4,49.6
+Living with a partner,32.4,19.0,15.2,33.4,51.3,48.7
+Region,Inactive,Low activity,Medium activity,High activity,Did not meet 2008 federal guidelines for aerobic activity,Met 2008 federal guidelines for aerobic activity
+Northeast,34.5,17.7,15.0,32.7,52.1,47.9
+Midwest,28.4,22.4,16.5,32.7,50.7,49.3
+South,33.5,19.3,14.5,32.8,52.6,47.4
+West,24.8,19.5,16.7,39.0,44.2,55.8
