@@ -5,16 +5,19 @@
 
 # Imports
 import matplotlib.pyplot as plt
+import os
 import pandas
 import sys
 import requests
 from bs4 import BeautifulSoup
 
+# Gets column (table header) names. This assumes that the only table header cells
+# will be those at the very top of the table, and that there will be exactly one <th> per column.
+# Also prints out all columns with their number so that user can pick the index column.
+#
+# @param table a BeautifulSoup object containing the Wikipedia table
+# @return      a list of column names (header names)
 def get_print_headers(table):
-        # Get column (table header) names. This assumes that the only table header cells
-        # will be those at the very top of the table, and that there will be exactly one <th> per column.
-        #
-        # Also print out all columns with their number so that user can pick the index column
         col_names = []
         for index, col in enumerate(table.findAll('th')):
             col_names.append(col.find(text = True))
@@ -22,6 +25,8 @@ def get_print_headers(table):
         return col_names
 
 # Gets user input on which column to use as the index column. If user does not enter an integer, reprompts them.
+#
+# @return the number of the column that the user wants to use as the index column
 def input_index():
 
     valid_input = False
@@ -30,6 +35,7 @@ def input_index():
 
         index_col_input = input('Enter a column number: ')
 
+        # Make sure user input is an integer
         try:
             index_col = int(index_col_input)
             valid_input = True
@@ -39,7 +45,10 @@ def input_index():
     return index_col
 
 
-# Generate and write header line
+# Generates and writes header line to CSV file.
+#
+# @param csv   the file object to write the headers to
+# @param cols  a list of column headers (in order)
 def write_header(csv, cols):
 
     header_line = ''
@@ -50,6 +59,11 @@ def write_header(csv, cols):
     csv.write(header_line + '\n')
 
 
+# Retrieves Wikipedia table headers and prompts user to choose index column.
+#
+# @param csv     the file object to write the headers to (gets passed to write_header())
+# @param table   the BeautifulSoup object containing the Wikipedia table (gets passed to get_print_headers())
+# @return index  the number of the column the user has selected to use as the index column
 def get_headers_index(csv, table):
 
     print()
@@ -71,7 +85,11 @@ def get_headers_index(csv, table):
     return index
 
 
-# Iterate over all non-header table rows
+# Iterates over all non-header table rows and gets the data from each row
+#
+# @param csv        the file object to write the data to
+# @param table      the BeautifulSoup object containing the Wikipedia table
+# @param index_col  the number of the column the user has selected to use as the index column
 def parse_table_body(csv, table, index_col):
 
     for row in table.findAll('tr')[1:]:
@@ -92,17 +110,25 @@ def parse_table_body(csv, table, index_col):
         csv.write(line + '\n')
 
 
+# Sorts file by index column data
+#
+# @param csv  the file object to write the Wikipedia table data to
 def sort(csv):
 
     filename = csv.name
     csv.close()
     df = pandas.read_csv(filename)
-    pandas.tools.plotting.scatter_matrix(df)
-    plt.show()
+    os.remove(filename)
+    df.sort_values(by = df.columns[0])  # Sort data by index column
+    df.to_csv(filename, index = False)
 
 
-# Process data
-def process(url, tables = 1):
+# Processes Wikipedia table data
+#
+# @param url     the url of the Wikipedia page containing the desired tables
+# @param tables  the numbers of the table(s) (in DOM order) to retrieve. Defaults to 0
+def process(url, tables = 0):
+
     result = requests.get(url)
     page = result.content
     soup = BeautifulSoup(page, "lxml")
@@ -125,18 +151,37 @@ def process(url, tables = 1):
         sort(f)
 
 
+# Called when file is run, and processes initial user input
 def main():
 
     # Make sure enough arguments were passed
-    if len(sys.argv) < 2:
-        print('Usage: scraper.py [wikipedia url] [nth table or range of tables (defaults to first table)]')
-        print()
-        print('Example: scraper.py https://en.wikipedia.org/wiki/List_of_rulers_of_Lithuania 3-5')
-        print('Scrapes 3rd, 4th, and 5th table (in DOM order) from the Wikipedia page listing rulers of Lithuania, and saves each table to a separate CSV file.')
+    if len(sys.argv) < 2 or len(sys.argv) > 3:
+
+        print('Incorrect usage. For help, run scraper.py -help')
         sys.exit()
+
+    elif sys.argv[1] == '-help':  # Print out help documentation
+
+        print('Usage: scraper.py [wikipedia url] [nth table or range of tables (defaults to first table)]')
+
+        print()
+
+        print('Example 1: scraper.py https://en.wikipedia.org/wiki/List_of_rulers_of_Lithuania 3-5')
+        print('Scrapes 3rd, 4th, and 5th table (in DOM order) from the Wikipedia page listing rulers of Lithuania, and saves each table to a separate CSV file in the current directory.')
+
+        print()
+
+        print('Example 2: scraper.py https://en.wikipedia.org/wiki/List_of_American_Idol_finalists 1')
+        print('Scrapes 1st table (in DOM order) from the Wikipedia page listing American Idol finalists, and saves it to a CSV file in the current directory.')
+
+        sys.exit()
+
     elif len(sys.argv) < 3:
+
         process(sys.argv[1])
+
     else:
+
         tables = []
         if '-' in sys.argv[2]:
             split = sys.argv[2].split('-')
@@ -146,6 +191,7 @@ def main():
             tables = int(sys.argv[2]) - 1
 
         process(sys.argv[1], tables)
+
 
 if __name__ == '__main__':
     main()
