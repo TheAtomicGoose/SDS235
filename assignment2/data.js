@@ -15,7 +15,7 @@ function getData(callback) {
 }
 
 function processData(data) {
-    var colors = ['#00907F', '#0010E5', '#E54000', '#DAA800', '#CE0ACE', '#FCC50D', '#6CF10C'];
+    var colors = ['#98abc5', '#8a89a6', '#7b6888', '#6b486b', '#a05d56', '#d0743c', '#ff8c00'];
     var catNames = {
         age: 'Age',
         education: 'Education',
@@ -26,15 +26,15 @@ function processData(data) {
     };
     Object.keys(data).forEach(function(item, index) {
         var currentData = data[item];
-        var colorRange = colors.slice(0, currentData.length - 1);
+        var colorRange = colors.slice(0, currentData.length);
         var svg = d3.select('#' + item),
-            margin = {top: 20, right: 20, bottom: 20, left: 20},
-            width = +svg.attr('width') - margin.left - margin.right,
-            height = +svg.attr('height') - margin.top - margin.bottom,
+            margin = {top: 20, right: 400, bottom: 20, left: 20},
+            width = +svg.attr('width').replace('px', '') - margin.left - margin.right,
+            height = +svg.attr('height').replace('px', '') - margin.top - margin.bottom,
             g = svg.append('g').attr('transform', 'translate(' + margin.left + ',' + margin.top + ')');
 
         var x0 = d3.scaleBand()
-            .rangeRound([0, width])
+            .rangeRound([0, +width])
             .paddingInner(0.1);
 
         var x1 = d3.scaleBand()
@@ -58,9 +58,6 @@ function processData(data) {
             });
         })]);
 
-        console.log(x0.bandwidth());
-        console.log(x1.bandwidth());
-
         g.append('g')
             .selectAll('g')
             .data(currentData)
@@ -76,20 +73,16 @@ function processData(data) {
             })
             .enter().append('rect')
             .attr('x', function(d) {
-                // console.log(x1(d.key));
                 return x1(d.key);
             })
             .attr('y', function(d) {
-                // console.log(y(d.value));
                 return y(d.value);
             })
             .attr('width', x1.bandwidth())
             .attr('height', function(d) {
-                // console.log(y(d.value));
                 return height - y(d.value);
             })
             .attr('fill', function(d) {
-                // console.log(z(d.key));
                 return z(d.key);
             });
 
@@ -118,7 +111,7 @@ function processData(data) {
             .data(keys.slice().reverse())
             .enter().append('g')
             .attr('transform', function(d, i) {
-                return 'translate(0,' + i * 20 + ')';
+                return 'translate(280,' + i * 20 + ')';
             });
 
         legend.append('rect')
