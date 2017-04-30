@@ -1,0 +1,32 @@
+/* #cloud-map { */
+/*     border: 1px solid black; */
+/* } */
+
+/* #cloud { */
+/*     border: 1px solid green; */
+/* } */
+
+/* #tree { */
+/*     border: 1px solid brown */
+/* } */
+
+/* #map { */
+/*     border: 1px solid blue */
+/* } */
+
+#cloud {
+    height: 20em;
+}
+
+#cloud svg g text:hover {
+    fill: #d3d3d3 !important;
+    cursor: pointer;
+}
+
+#tree {
+    height: 20em;
+}
+
+#map {
+    height: 40em;
+}

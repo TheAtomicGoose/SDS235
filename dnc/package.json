@@ -1,0 +1,23 @@
+{
+  "name": "dnc",
+  "version": "1.0.0",
+  "description": "a visualization of the leaked DNC emails",
+  "main": "vis.js",
+  "dependencies": {
+    "async": "^2.3.0",
+    "d3": "^4.8.0",
+    "d3-cloud": "^1.2.4",
+    "jquery-browserify": "^1.8.1",
+    "jsonfile": "^2.4.0",
+    "mailparser": "^2.0.4",
+    "mongodb": "^2.2.26",
+    "most-common": "^1.2.1",
+    "mysql": "^2.13.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Jesse Evers",
+  "license": "ISC"
+}

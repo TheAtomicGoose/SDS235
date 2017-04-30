@@ -1,0 +1,12 @@
+extends layout
+
+block content
+  h1= DNCViz
+
+  div.pure-g
+    div.pure-u-1-2#cloud-map Cloud Map
+      div#cloud
+      div#map Map
+    div.pure-u-1-2#tree Tree
+
+  script(src='/javascripts/bundle.js')
