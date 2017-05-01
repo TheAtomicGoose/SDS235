@@ -7,10 +7,10 @@
     "async": "^2.3.0",
     "d3": "^4.8.0",
     "d3-cloud": "^1.2.4",
+    "d3-svg-legend": "^2.24.0",
     "jquery-browserify": "^1.8.1",
     "jsonfile": "^2.4.0",
     "mailparser": "^2.0.4",
-    "mongodb": "^2.2.26",
     "most-common": "^1.2.1",
     "mysql": "^2.13.0"
   },

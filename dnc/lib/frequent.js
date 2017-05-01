@@ -11,7 +11,8 @@ var con = mysql.createConnection(require('./db'));
 
 function pare(matches) {
 
-    var commonWords = require('./common');
+    var commonWords = require('../common');
+    console.log(commonWords);
     Object.keys(commonWords).forEach(function(key) {
 
         if (commonWords[key] < matches) {
@@ -27,7 +28,7 @@ function pare(matches) {
 }
 
 function findMostCommon(connection) {
-    con.query('SELECT text FROM emails', function(err, rows) {
+    con.query('SELECT parsed_text FROM emails', function(err, rows) {
         var commonWords = require('./common');
         if (err) {
             console.log('query error: ' + err);
@@ -40,7 +41,7 @@ function findMostCommon(connection) {
                 //  - Removes all characters except letters and spaces
                 //  - Creates array of words by splitting at spaces
                 //  - Filters out all words shorter than 5 characters
-                modText = row.text.replace(/[^a-zA-Z ]/g, '').split(' ').filter(function(word) {
+                modText = row.parsed_text.split(' ').filter(function(word) {
                     return word.length > 4;
                 });
 
@@ -51,13 +52,13 @@ function findMostCommon(connection) {
                     } else {
                         commonWords[word.token] = word.count;
                     }
+                    // console.log(commonWords);
                     callback();
                 }, function(err) {
                     if (err) {
                         console.log('word loop err: ' + err);
-                    } else {
-                        rowCallback();
                     }
+                    rowCallback();
                 });
             }, function(err) {
                 if (err) {
@@ -66,7 +67,8 @@ function findMostCommon(connection) {
 
                     // Write commonWords to common.json
                     jsonfile.writeFile('./common.json', commonWords, function(err) {
-                        console.log('jsonfile write error: ' + err);
+                        if (err) console.log('jsonfile write error: ' + err);
+                        console.log('write successful');
                     });
 
                     // Close MySQL connection

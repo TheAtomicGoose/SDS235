@@ -1,12 +1,11 @@
 extends layout
 
 block content
-  h1= DNCViz
-
-  div.pure-g
-    div.pure-u-1-2#cloud-map Cloud Map
-      div#cloud
-      div#map Map
-    div.pure-u-1-2#tree Tree
+  div#container
+    div.pure-g#cloud-map
+      div.pure-u-1-2#cloud
+      div.pure-u-1-2#map
+        h2#email
+    div#tree
 
   script(src='/javascripts/bundle.js')

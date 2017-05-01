@@ -15,7 +15,7 @@
 /* } */
 
 #cloud {
-    height: 20em;
+    height: 18em;
 }
 
 #cloud svg g text:hover {
@@ -24,9 +24,19 @@
 }
 
 #tree {
-    height: 20em;
+    height: 450px;
+    width: 100%;
 }
 
 #map {
-    height: 40em;
+    /* height: 20em; */
+}
+
+#map h2#email {
+    text-align: center;
+}
+
+#map svg g g.color-legend g.legendCells g.cell text:hover {
+    fill: #d3d3d3 !important;
+    cursor: pointer;
 }

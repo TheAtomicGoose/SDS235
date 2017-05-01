@@ -1,5 +1,6 @@
 var d3 = require('d3');
 var cloud = require('d3-cloud');
+var tree = require('./tree');
 var $ = require('jquery-browserify');
 
 var fill = d3.schemeCategory20;
@@ -11,13 +12,14 @@ Object.keys(rawWords).forEach(function(key) {
     words.push({text: key.toLowerCase(), size: Math.sqrt(rawWords[key] / 10)});
 });
 
-var layout = cloud().size([$('#cloud').width(), $('#cloud').height()])
+var margin = {top: 80, right: 10, bottom: 0, left: 0};
+
+var layout = cloud().size([$('#cloud').width() - margin.right - margin.left, $('#cloud').height() - margin.top - margin.bottom])
     .words(words)
     .padding(5)
     .rotate(function() { return ~~(Math.random() * 2) * 90; })
     .font('Impact')
         .fontSize(function(d) {
-            console.log(d, d.size);
             return d.size;
         })
     .on('end', draw);
@@ -26,8 +28,9 @@ layout.start();
 
 function draw(words) {
     d3.select('#cloud').append('svg')
-            .attr('width', layout.size()[0])
-            .attr('height', layout.size()[1])
+            .attr('width', layout.size()[0] + margin.left + margin.right)
+            .attr('height', layout.size()[1] + margin.top + margin.bottom)
+        .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')')
         .append('g')
             .attr('transform', 'translate(' + layout.size()[0] / 2 + ',' + layout.size()[1] / 2 + ')')
         .selectAll('text')
@@ -44,8 +47,3 @@ function draw(words) {
 
 }
 
-$(document).ready(function() {
-    $('#cloud svg g text').click(function() {
-        console.log(this.textContent);
-    });
-});

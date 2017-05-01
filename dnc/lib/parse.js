@@ -43,7 +43,11 @@ con.query('SELECT id, text FROM emails', function(err, rows) {
         console.log(err);
     } else {
         async.each(rows, function(row, callback) {
-            modText = row.text.replace(/[^a-zA-Z ]/g, '');
+            modText = JSON.parse(row.text).replace(/[^a-zA-Z \n\r]/g, '');
+            modText = modText.replace(/begin forwarded message[\s\S]+subject[\s\S]+/gi, '');
+            modText = modText.replace(/on.*wrote|sent from my iphone.*\n/gi, '');
+            modText = modText.replace(/[\r?\n|\r]+/g, ' ');
+            modText = modText.replace(/ +/g, ' ');
 
             modText = modText.toLowerCase().split(' ').filter(function(element) {
                 return element.length < 20;
