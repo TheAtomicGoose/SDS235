@@ -1,21 +1,6 @@
-/* #cloud-map { */
-/*     border: 1px solid black; */
-/* } */
-
-/* #cloud { */
-/*     border: 1px solid green; */
-/* } */
-
-/* #tree { */
-/*     border: 1px solid brown */
-/* } */
-
-/* #map { */
-/*     border: 1px solid blue */
-/* } */
-
 #cloud {
     height: 18em;
+    /* border-left: 1px solid #d3d3d3; */
 }
 
 #cloud svg g text:hover {
@@ -28,15 +13,18 @@
     width: 100%;
 }
 
-#map {
-    /* height: 20em; */
+#cloud-map {
+    border-bottom: 1px solid #d3d3d3;
 }
 
 #map h2#email {
     text-align: center;
 }
 
-#map svg g g.color-legend g.legendCells g.cell text:hover {
-    fill: #d3d3d3 !important;
-    cursor: pointer;
+#map svg g rect:hover {
+    fill: #d3d3d3;
+}
+
+g.axis g.tick text {
+    display: none;
 }

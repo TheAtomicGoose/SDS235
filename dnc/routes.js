@@ -13,9 +13,8 @@ router.post('/', function(req, res, next) {
             res.send(phrases);
         });
     } else if (req.body.email) {
-        utils.getContacts(req.body.email, function(contacts) {
-            console.log(contacts);
-            res.send(contacts);
+        utils.getContacts(req.body.email, function(data) {
+            res.send(data);
         });
     }
 });
