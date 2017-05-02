@@ -35,10 +35,10 @@ function processData(data) {
 
         var x0 = d3.scaleBand()
             .rangeRound([0, +width])
-            .paddingInner(0.1);
+            .paddingInner(0.2);
 
         var x1 = d3.scaleBand()
-            .paddingInner(.05);
+            .paddingInner(.1);
 
         var y = d3.scaleLinear()
             .rangeRound([height, 0]);
