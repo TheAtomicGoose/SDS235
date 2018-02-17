@@ -70,7 +70,7 @@ exports.getPhrases = function (word, callback) {
             }, function(err) {
                 if (err) console.log('error iterating over db rows: ' + err);
                 callback(phrases);
-                con.close(function(err) {});
+                con.end(function(err) {});
             });
         }
     });

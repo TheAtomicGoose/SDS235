@@ -32683,7 +32683,7 @@ var $ = require('jquery-browserify');
 
 $(document).ready(function() {
     // Default tree and pie chart
-    chart.render('gardem@dnc.org', function() { addClickListeners(); });
+    chart.render('mirandal@dnc.org', function() { addClickListeners(); });
     tree.render('democratic');
 
     function addClickListeners() {
