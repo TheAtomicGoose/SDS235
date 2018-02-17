@@ -1,3 +1,4 @@
 */node_modules/
 .#*
 project_data/
+dnc/lib/db.json
